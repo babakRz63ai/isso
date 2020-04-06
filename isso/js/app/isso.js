@@ -19,18 +19,21 @@ define(["app/dom", "app/utils", "app/config", "app/api", "app/jade", "app/i18n",
         el.onsuccess = function() {};
 
         el.validate = function() {
-            if (utils.text($(".textarea", this).innerHTML).length < 3 ||
-                $(".textarea", this).classList.contains("placeholder"))
+        		var textArea = $(".textarea", this);
+            if (utils.text(textArea.innerHTML).length < 3 ||
+                textArea.classList.contains("placeholder"))
             {
-                $(".textarea", this).focus();
+            		textArea.classList.add("invalid");
+                textArea.focus();
                 return false;
             }
+            
             if (config["require-email"] &&
                 $("[name='email']", this).value.length <= 0)
             {
-            	var element = $("[name='email']", this);
-            	element.classList.add("invalid");
-              element.focus();
+            	var email = $("[name='email']", this);
+            	email.classList.add("invalid");
+              email.focus();
               return false;
             }
             
@@ -38,9 +41,9 @@ define(["app/dom", "app/utils", "app/config", "app/api", "app/jade", "app/i18n",
                 $("[name='author']", this).value.length <= 0)
             {
             	// add an "invalid" class to the field:
-            	var element = $("[name='author']", this);
-              element.classList.add("invalid");
-              element.focus();
+            	var author = $("[name='author']", this);
+              author.classList.add("invalid");
+              author.focus();
               return false;
             }
             return true;
@@ -122,8 +125,12 @@ define(["app/dom", "app/utils", "app/config", "app/api", "app/jade", "app/i18n",
         lib.editorify($(".textarea", el));
         
         // Removes 'invalid' class from input fields whose values user modifies
+        var tempTextArea = $(".textarea", el);
+        tempTextArea.on("input", function(){tempTextArea.classList.remove("invalid");});
+        
         var tempAuthor = $("[name='author']", el);
         tempAuthor.on("input", function() {tempAuthor.classList.remove("invalid");});
+        
         var tempEmail = $("[name='email']", el);
         tempEmail.on("input", function() {tempEmail.classList.remove("invalid");});
 
