@@ -28,13 +28,19 @@ define(["app/dom", "app/utils", "app/config", "app/api", "app/jade", "app/i18n",
             if (config["require-email"] &&
                 $("[name='email']", this).value.length <= 0)
             {
-              $("[name='email']", this).focus();
+            	var element = $("[name='email']", this);
+            	element.classList.add("invalid");
+              element.focus();
               return false;
             }
+            
             if (config["require-author"] &&
                 $("[name='author']", this).value.length <= 0)
             {
-              $("[name='author']", this).focus();
+            	// add an "invalid" class to the field:
+            	var element = $("[name='author']", this);
+              element.classList.add("invalid");
+              element.focus();
               return false;
             }
             return true;
@@ -114,6 +120,12 @@ define(["app/dom", "app/utils", "app/config", "app/api", "app/jade", "app/i18n",
         });
 
         lib.editorify($(".textarea", el));
+        
+        // Removes 'invalid' class from input fields whose values user modifies
+        var tempAuthor = $("[name='author']", el);
+        tempAuthor.on("input", function() {tempAuthor.classList.remove("invalid");});
+        var tempEmail = $("[name='email']", el);
+        tempEmail.on("input", function() {tempEmail.classList.remove("invalid");});
 
         return el;
     };
