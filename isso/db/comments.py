@@ -270,7 +270,7 @@ class Comments:
 
     def vote(self, upvote, id, remote_addr):
         """+1 a given comment. Returns the new like count (may not change because
-        the creater can't vote on his/her own comment and multiple votes from the
+        the author can't vote on his/her own comment and multiple votes from the
         same ip address are ignored as well)."""
 
         rv = self.db.execute(
@@ -315,7 +315,7 @@ class Comments:
 
     def count(self, *urls):
         """
-        Return comment count for one ore more urls..
+        Return comment count for one or more urls..
         """
 
         threads = dict(self.db.execute([
