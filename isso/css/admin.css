@@ -51,6 +51,26 @@ input {
     color: #4d4c4c;
     text-decoration: none;
 }
+.header .signout {
+	transition-duration: 0.1s;
+	background-color: bisque;
+	border: none;
+	text-decoration: none;
+    display: inline-block;
+    padding: 15px 32px;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.header .signout:hover {
+	background-color: tomato;
+}
+
+.header .signout:active {
+	background-color: red;
+}
+
+
 .outer {
     background-color: #eeeeee;
     box-shadow: 0 0 0.5em #c0c0c0 inset;

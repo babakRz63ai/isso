@@ -97,4 +97,9 @@ function send_edit(com_id, hash, isso_host_script) {
     edit(com_id, hash, author, email, website, comment, isso_host_script);
     stop_edit(com_id);
 }
-
+function signOut()
+{
+	document.cookie = "admin-session=;expires=Thu; 01 Jan 1970";
+	window.location.search = "";
+	window.location.hash = "";
+}
